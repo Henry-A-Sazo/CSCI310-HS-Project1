@@ -69,12 +69,12 @@ public class MainActivity extends AppCompatActivity {
 
         // Method (2): add four dynamically created cells
         GridLayout grid = (GridLayout) findViewById(R.id.gridLayout01);
-        for (int i = 0; i<=10; i++) { //rows
-            for (int j=0; j<=1; j++) { //coloumns
+        for (int i = 0; i<=11; i++) { //rows
+            for (int j=0; j<=9; j++) { //coloumns
 
                 TextView tv = new TextView(this); //dynamic cell creration
-                tv.setHeight( dpToPixel(32) ); //height
-                tv.setWidth( dpToPixel(32) ); //width
+                tv.setHeight( dpToPixel(30) ); //height
+                tv.setWidth( dpToPixel(30) ); //width
                 tv.setTextSize( 16 );//dpToPixel(32) ); //text size
                 tv.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER); //center text
                 tv.setTextColor(Color.GRAY); //text color
