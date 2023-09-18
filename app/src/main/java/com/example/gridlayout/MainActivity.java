@@ -1,8 +1,10 @@
 package com.example.gridlayout;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.gridlayout.widget.GridLayout;
-
+import java.util.Random;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -22,9 +24,12 @@ public class MainActivity extends AppCompatActivity {
     //inital counter for clock
     private int clock = 0;
 
+    private int flag_count = 4;
+
     // save the TextViews of all cells in an array, so later on,
     // when a TextView is clicked, we know which cell it is
     private ArrayList<TextView> cell_tvs;
+    private ArrayList<TextView> flags;
 
     //for the button used to dig and flag
     ImageButton btn;
@@ -49,40 +54,6 @@ public class MainActivity extends AppCompatActivity {
         //Digging and flagging functionality button
         runButton();
 
-//        // Method (1): add statically created cells
-//        TextView tv00 = (TextView) findViewById(R.id.textView00);
-//        TextView tv01 = (TextView) findViewById(R.id.textView01);
-//        TextView tv10 = (TextView) findViewById(R.id.textView10);
-//        TextView tv11 = (TextView) findViewById(R.id.textView11);
-////        TextView tv20 = (TextView) findViewById(R.id.textView20);
-//
-//        tv00.setTextColor(Color.GRAY);
-//        tv00.setBackgroundColor(Color.GRAY);
-//        tv00.setOnClickListener(this::onClickTV);
-//
-//        tv01.setTextColor(Color.GRAY);
-//        tv01.setBackgroundColor(Color.GRAY);
-//        tv01.setOnClickListener(this::onClickTV);
-//
-//        tv10.setTextColor(Color.GRAY);
-//        tv10.setBackgroundColor(Color.GRAY);
-//        tv10.setOnClickListener(this::onClickTV);
-//
-//        tv11.setTextColor(Color.GRAY);
-//        tv11.setBackgroundColor(Color.GRAY);
-//        tv11.setOnClickListener(this::onClickTV);
-//
-////        tv20.setTextColor(Color.GRAY);
-////        tv20.setBackgroundColor(Color.GRAY);
-////        tv20.setOnClickListener(this::onClickTV);
-//
-//        cell_tvs.add(tv00);
-//        cell_tvs.add(tv01);
-//        cell_tvs.add(tv10);
-//        cell_tvs.add(tv11);
-////        cell_tvs.add(tv20);
-
-        // Method (2): add four dynamically created cells
         //Creating all the cells on the grid
         GridLayout grid = (GridLayout) findViewById(R.id.gridLayout01);
         for (int i = 0; i<=11; i++) { //rows
@@ -90,19 +61,15 @@ public class MainActivity extends AppCompatActivity {
                 TextView tv = new TextView(this); //dynamic cell creation
                 tv.setHeight(dpToPixel(30)); //height
                 tv.setWidth(dpToPixel(30)); //width
-//                tv.setTextSize(16);//dpToPixel(32) ); //text size
+                tv.setTextSize(16);//dpToPixel(32) ); //text size
                 tv.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER); //center text
-                tv.setTextColor(Color.WHITE); //text color
                 tv.setBackgroundColor(Color.GREEN); //background color
-                tv.setOnClickListener(this::onClickTV);
-
+                tv.setOnClickListener(this::onClickTV);//calls the function that handles when things are clicked
                 GridLayout.LayoutParams lp = new GridLayout.LayoutParams();
                 lp.setMargins(dpToPixel(2), dpToPixel(2), dpToPixel(2), dpToPixel(2));
                 lp.rowSpec = GridLayout.spec(i);
                 lp.columnSpec = GridLayout.spec(j);
-
                 grid.addView(tv, lp);
-
                 cell_tvs.add(tv);
             }
         }
@@ -157,12 +124,19 @@ public class MainActivity extends AppCompatActivity {
         int n = findIndexOfCellTextView(tv);
         int i = n/COLUMN_COUNT;
         int j = n%COLUMN_COUNT;
-        tv.setText(String.valueOf(i)+String.valueOf(j));
-        if (tv.getCurrentTextColor() == Color.GREEN) {
-            tv.setTextColor(Color.GRAY);
-            tv.setBackgroundColor(Color.parseColor("lime"));
-        }else {
-            tv.setTextColor(Color.LTGRAY);
+        if (flag == true)
+        {
+            if(flag_count != 0)
+            {
+                tv.setBackgroundColor(Color.parseColor("lime"));
+                tv.setBackground(getResources().getDrawable(R.drawable.flag_img));
+                TextView cnt = (TextView) findViewById(R.id.flag_count);
+                flag_count--;
+                cnt.setText(String.valueOf(flag_count));
+            }
+        }
+//        tv.setText(String.valueOf(i)+String.valueOf(j));
+        else {
             tv.setBackgroundColor(Color.LTGRAY);
         }
     }
