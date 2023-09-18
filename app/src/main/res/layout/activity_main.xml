@@ -8,20 +8,20 @@
 
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/gridLayout01"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="353dp"
+        android:layout_height="569dp"
         android:layout_gravity="center"
         android:layout_marginStart="32dp"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
         app:columnCount="10"
-        app:rowCount="12"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintVertical_bias="0.257"
+        app:rowCount="12">
 
 
         <!--        <TextView-->
@@ -56,53 +56,6 @@
         <!--            app:layout_column="1"-->
         <!--            app:layout_row="0" />-->
 
-        <!--        <TextView-->
-        <!--            android:id="@+id/textView10"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginStart="2dp"-->
-        <!--            android:layout_marginTop="2dp"-->
-        <!--            android:layout_marginEnd="2dp"-->
-        <!--            android:layout_marginBottom="2dp"-->
-        <!--            android:height="64dp"-->
-        <!--            android:width="64dp"-->
-        <!--            android:text="10"-->
-        <!--            android:textSize="16sp"-->
-        <!--            android:textAlignment="center"-->
-        <!--            app:layout_column="0"-->
-        <!--            app:layout_row="1" />-->
-
-        <!--        <TextView-->
-        <!--            android:id="@+id/textView11"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginStart="2dp"-->
-        <!--            android:layout_marginTop="2dp"-->
-        <!--            android:layout_marginEnd="2dp"-->
-        <!--            android:layout_marginBottom="2dp"-->
-        <!--            android:width="64dp"-->
-        <!--            android:height="64dp"-->
-        <!--            android:text="11"-->
-        <!--            android:textSize="16sp"-->
-        <!--            android:textAlignment="center"-->
-        <!--            app:layout_column="1"-->
-        <!--            app:layout_row="1" />-->
-
-        <!--        <TextView-->
-        <!--            android:id="@+id/textView20"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginStart="2dp"-->
-        <!--            android:layout_marginTop="2dp"-->
-        <!--            android:layout_marginEnd="2dp"-->
-        <!--            android:layout_marginBottom="2dp"-->
-        <!--            android:width="64dp"-->
-        <!--            android:height="64dp"-->
-        <!--            android:text="20"-->
-        <!--            android:textSize="16sp"-->
-        <!--            android:textAlignment="center"-->
-        <!--            app:layout_column="0"-->
-        <!--            app:layout_row="2" />-->
 
     </androidx.gridlayout.widget.GridLayout>
 
@@ -120,19 +73,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="280dp"
-        android:layout_marginTop="25dp"
-        >
+        android:layout_marginTop="25dp">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/baseline_timer_24"
-            />
+            android:src="@drawable/baseline_timer_24" />
+
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/imgbutton"
+        android:layout_width="87dp"
+        android:layout_height="67dp"
+        android:layout_marginEnd="160dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/white"
+        android:contentDescription="Enter How Much Cookies You Want"
+        android:src="@drawable/brush_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"></ImageButton>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -25,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
     // when a TextView is clicked, we know which cell it is
     private ArrayList<TextView> cell_tvs;
 
+    //for the button used to dig and flag
+    ImageButton btn;
+    private boolean flag;
+
     private int dpToPixel(int dp) {
         float density = Resources.getSystem().getDisplayMetrics().density;
         return Math.round(dp * density);
@@ -35,8 +40,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //arraylist to hold all the cells from the grid
         cell_tvs = new ArrayList<TextView>();
+
+        //Start the timer for the game
         runTimer();
+
+        //Digging and flagging functionality button
+        runButton();
 
 //        // Method (1): add statically created cells
 //        TextView tv00 = (TextView) findViewById(R.id.textView00);
@@ -72,13 +83,14 @@ public class MainActivity extends AppCompatActivity {
 ////        cell_tvs.add(tv20);
 
         // Method (2): add four dynamically created cells
+        //Creating all the cells on the grid
         GridLayout grid = (GridLayout) findViewById(R.id.gridLayout01);
         for (int i = 0; i<=11; i++) { //rows
             for (int j = 0; j <= 9; j++) { //coloumns
                 TextView tv = new TextView(this); //dynamic cell creation
                 tv.setHeight(dpToPixel(30)); //height
                 tv.setWidth(dpToPixel(30)); //width
-                tv.setTextSize(16);//dpToPixel(32) ); //text size
+//                tv.setTextSize(16);//dpToPixel(32) ); //text size
                 tv.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER); //center text
                 tv.setTextColor(Color.WHITE); //text color
                 tv.setBackgroundColor(Color.GRAY); //background color
@@ -109,6 +121,25 @@ public class MainActivity extends AppCompatActivity {
                 timeView.setText(time);
                 clock++;
                 handler.postDelayed(this, 1000);
+            }
+        });
+    }
+
+    private void runButton(){
+        //creating the button
+        btn = findViewById(R.id.imgbutton);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(flag ==  true)
+                {
+                    flag = false;
+                    btn.setImageDrawable(getResources().getDrawable(R.drawable.brush_24));
+                }
+                else {
+                    flag = true;
+                    btn.setImageDrawable(getResources().getDrawable(R.drawable.flag_img));
+                }
             }
         });
     }
