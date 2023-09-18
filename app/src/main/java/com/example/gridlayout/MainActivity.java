@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     // when a TextView is clicked, we know which cell it is
     private ArrayList<TextView> cell_tvs;
     private ArrayList<TextView> flags;
+    private ArrayList<TextView> bombs;
 
     //for the button used to dig and flag
     ImageButton btn;
@@ -64,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
                 tv.setTextSize(16);//dpToPixel(32) ); //text size
                 tv.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER); //center text
                 tv.setBackgroundColor(Color.GREEN); //background color
+                tv.setText("0");
+                tv.setTextColor(Color.GREEN);
                 tv.setOnClickListener(this::onClickTV);//calls the function that handles when things are clicked
                 GridLayout.LayoutParams lp = new GridLayout.LayoutParams();
                 lp.setMargins(dpToPixel(2), dpToPixel(2), dpToPixel(2), dpToPixel(2));
@@ -71,6 +74,27 @@ public class MainActivity extends AppCompatActivity {
                 lp.columnSpec = GridLayout.spec(j);
                 grid.addView(tv, lp);
                 cell_tvs.add(tv);
+            }
+        }
+
+        //calling the randomizer for the bombs
+        randomizer();
+    }
+
+    private void randomizer(){
+        Random ran = new Random();
+
+        for (int k = 0; k < 4; k++)
+        {
+            int cell = ran.nextInt(100);
+
+            for (int n=0; n<cell_tvs.size(); n++) {
+                if(n == cell)
+                {
+                    cell_tvs.get(n).setBackground(getResources().getDrawable(R.drawable.baseline_upcoming_24));
+                    cell_tvs.get(n).setBackgroundColor(Color.BLUE);
+                    bombs.add(cell_tvs.get(n));
+                }
             }
         }
     }
@@ -126,17 +150,19 @@ public class MainActivity extends AppCompatActivity {
         int j = n%COLUMN_COUNT;
         if (flag == true)
         {
-            if(flag_count != 0)
+            if(flag_count != 0 && tv.getCurrentTextColor() != Color.BLACK)
             {
                 tv.setBackgroundColor(Color.parseColor("lime"));
                 tv.setBackground(getResources().getDrawable(R.drawable.flag_img));
                 TextView cnt = (TextView) findViewById(R.id.flag_count);
                 flag_count--;
                 cnt.setText(String.valueOf(flag_count));
+                tv.setText(" ");
             }
         }
 //        tv.setText(String.valueOf(i)+String.valueOf(j));
         else {
+            tv.setTextColor(Color.BLACK);
             tv.setBackgroundColor(Color.LTGRAY);
         }
     }
