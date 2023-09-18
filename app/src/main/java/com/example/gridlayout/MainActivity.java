@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 //                tv.setTextSize(16);//dpToPixel(32) ); //text size
                 tv.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER); //center text
                 tv.setTextColor(Color.WHITE); //text color
-                tv.setBackgroundColor(Color.GRAY); //background color
+                tv.setBackgroundColor(Color.GREEN); //background color
                 tv.setOnClickListener(this::onClickTV);
 
                 GridLayout.LayoutParams lp = new GridLayout.LayoutParams();
@@ -158,11 +158,11 @@ public class MainActivity extends AppCompatActivity {
         int i = n/COLUMN_COUNT;
         int j = n%COLUMN_COUNT;
         tv.setText(String.valueOf(i)+String.valueOf(j));
-        if (tv.getCurrentTextColor() == Color.GRAY) {
-            tv.setTextColor(Color.GREEN);
+        if (tv.getCurrentTextColor() == Color.GREEN) {
+            tv.setTextColor(Color.GRAY);
             tv.setBackgroundColor(Color.parseColor("lime"));
         }else {
-            tv.setTextColor(Color.GRAY);
+            tv.setTextColor(Color.LTGRAY);
             tv.setBackgroundColor(Color.LTGRAY);
         }
     }
