@@ -25,12 +25,13 @@ public class MainActivity extends AppCompatActivity {
     private int clock = 0;
 
     private int flag_count = 4;
+    private boolean bomb = false;
 
     // save the TextViews of all cells in an array, so later on,
     // when a TextView is clicked, we know which cell it is
     private ArrayList<TextView> cell_tvs;
     private ArrayList<TextView> flags;
-    private ArrayList<TextView> bombs;
+    public ArrayList<TextView> bombs = new ArrayList<TextView>();
 
     //for the button used to dig and flag
     ImageButton btn;
@@ -83,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void randomizer(){
         Random ran = new Random();
+        int count = 0;
 
         for (int k = 0; k < 4; k++)
         {
@@ -91,9 +93,10 @@ public class MainActivity extends AppCompatActivity {
             for (int n=0; n<cell_tvs.size(); n++) {
                 if(n == cell)
                 {
+                    bombs.add(cell_tvs.get(n));
                     cell_tvs.get(n).setBackground(getResources().getDrawable(R.drawable.baseline_upcoming_24));
                     cell_tvs.get(n).setBackgroundColor(Color.BLUE);
-                    bombs.add(cell_tvs.get(n));
+                    cell_tvs.get(n).setText(" ");
                 }
             }
         }
@@ -143,11 +146,23 @@ public class MainActivity extends AppCompatActivity {
         return -1;
     }
 
+    public void checker(TextView tv){
+        for (int i = 0; i < bombs.size(); i++)
+        {
+            if (tv == bombs.get(i))
+            {
+                tv.setBackgroundColor(Color.RED);
+                bomb = true;
+            }
+        }
+    }
+
     public void onClickTV(View view){
         TextView tv = (TextView) view;
         int n = findIndexOfCellTextView(tv);
         int i = n/COLUMN_COUNT;
         int j = n%COLUMN_COUNT;
+        checker(tv);
         if (flag == true)
         {
             if(flag_count != 0 && tv.getCurrentTextColor() != Color.BLACK)
@@ -161,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 //        tv.setText(String.valueOf(i)+String.valueOf(j));
-        else {
+        else if(bomb == false){
             tv.setTextColor(Color.BLACK);
             tv.setBackgroundColor(Color.LTGRAY);
         }
