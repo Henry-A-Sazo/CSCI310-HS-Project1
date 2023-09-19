@@ -80,13 +80,13 @@ public class MainActivity extends AppCompatActivity {
         randomizer();
     }
 
-    public void sendMessage(){
-        TextView timeee = (TextView) findViewById(R.id.text_counter);
-        String message = timeee.getText().toString();
-        Intent intent = new Intent(this, EndScreen.class);
-        intent.putExtra("com.example.gridlayout.MESSAGE", message);
-        startActivity(intent);
-    }
+//    public void sendMessage(){
+//        TextView timeee = (TextView) findViewById(R.id.text_counter);
+//        String message = timeee.getText().toString();
+//        Intent intent = new Intent(this, EndScreen.class);
+//        intent.putExtra("com.example.gridlayout.MESSAGE", message);
+//        startActivity(intent);
+//    }
 
     private void randomizer(){
         Random ran = new Random();
@@ -101,11 +101,25 @@ public class MainActivity extends AppCompatActivity {
                 {
                     bombs.add(cell_tvs.get(n));
                     cell_tvs.get(n).setBackground(getResources().getDrawable(R.drawable.baseline_upcoming_24));
-                    cell_tvs.get(n).setBackgroundColor(Color.BLUE);
+                    cell_tvs.get(n).setBackgroundColor(Color.GREEN);
                     cell_tvs.get(n).setText(" ");
+                    setCounts(cell_tvs.get(n), n);
+
                 }
             }
         }
+    }
+
+    private void setCounts(TextView tv, int n){
+        cell_tvs.get(n-9).setText("1");
+        cell_tvs.get(n-10).setText("1");
+        cell_tvs.get(n-11).setText("1");
+        cell_tvs.get(n+9).setText("1");
+        cell_tvs.get(n+10).setText("1");
+        cell_tvs.get(n+11).setText("1");
+        cell_tvs.get(n-1).setText("1");
+        cell_tvs.get(n+1).setText("1");
+
     }
 
     private void runTimer() {
@@ -158,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
             if (tv == bombs.get(i))
             {
                 bomb = true;
-                sendMessage();
+//                sendMessage();
             }
         }
     }
