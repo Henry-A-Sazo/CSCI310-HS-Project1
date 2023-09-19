@@ -1,7 +1,6 @@
 package com.example.gridlayout;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
+import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.gridlayout.widget.GridLayout;
 import java.util.Random;
@@ -9,12 +8,9 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -23,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int COLUMN_COUNT = 10;
     //inital counter for clock
     private int clock = 0;
+
+    public String timeS;
 
     private int flag_count = 4;
     private boolean bomb = false;
@@ -82,6 +80,14 @@ public class MainActivity extends AppCompatActivity {
         randomizer();
     }
 
+    public void sendMessage(){
+        TextView timeee = (TextView) findViewById(R.id.text_counter);
+        String message = timeee.getText().toString();
+        Intent intent = new Intent(this, EndScreen.class);
+        intent.putExtra("com.example.gridlayout.MESSAGE", message);
+        startActivity(intent);
+    }
+
     private void randomizer(){
         Random ran = new Random();
         int count = 0;
@@ -111,8 +117,8 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 int minutes = (clock%3600) / 60;
                 int seconds = clock%60;
-                String time = String.format("%02d:%02d", minutes, seconds);
-                timeView.setText(time);
+                timeS = String.format("%02d:%02d", minutes, seconds);
+                timeView.setText(timeS);
                 clock++;
                 handler.postDelayed(this, 1000);
             }
@@ -151,8 +157,8 @@ public class MainActivity extends AppCompatActivity {
         {
             if (tv == bombs.get(i))
             {
-                tv.setBackgroundColor(Color.RED);
                 bomb = true;
+                sendMessage();
             }
         }
     }
